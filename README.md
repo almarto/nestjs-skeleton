@@ -37,7 +37,6 @@ nestjs-skeleton is [MIT licensed](LICENSE).
 
 ## TODO
 
-- Add Docker
 - Add MySQL
 - Add authentication
   - Plop will be able to create new entities which requires or not Auth.
