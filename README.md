@@ -24,7 +24,9 @@ $ yarn debug
 $ yarn prod
 ```
 
-### In order to debug, if you're using VSCode you'll just need to enable Auto Attach `CMD+Shift+P => Debug: Toggle Auto Attach`
+#### In order to debug, if you're using VSCode you'll just need to enable Auto Attach
+
+`CMD+Shift+P => Debug: Toggle Auto Attach`
 
 ## Stay in touch
 
