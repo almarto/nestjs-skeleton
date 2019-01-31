@@ -20,6 +20,7 @@ target/
 
 # Logs and databases #
 ######################
+database_data/
 data/
 logs/
 *.log

@@ -6,10 +6,11 @@ import {
   Param,
   Post,
   Query,
+  Put,
 } from '@nestjs/common';
 
 import { BooksService } from './books.service';
-import { CreateBookDTO } from './dto/create-book.dto';
+import { Book } from './book.entity';
 
 @Controller('books')
 export class BooksController {
@@ -21,16 +22,22 @@ export class BooksController {
     return books;
   }
 
-  @Get(':bookID')
-  public async getBook(@Param('bookID') bookID) {
-    const book = await this.booksService.getBook(bookID);
+  @Get(':bookId')
+  public async getBook(@Param('bookId') bookId) {
+    const book = await this.booksService.getBook(bookId);
     return book;
   }
 
   @Post()
-  public async addBook(@Body() createBookDTO: CreateBookDTO) {
-    const book = await this.booksService.addBook(createBookDTO);
-    return book;
+  public async addBook(@Body() book: Book) {
+    const createdBook = await this.booksService.addBook(book);
+    return createdBook;
+  }
+
+  @Put(':bookId')
+  public async updateBook(@Param('bookId') bookId, @Body() book: Book) {
+    const createdBook = await this.booksService.updateBook(bookId, book);
+    return createdBook;
   }
 
   @Delete()

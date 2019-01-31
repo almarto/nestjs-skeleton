@@ -39,8 +39,9 @@ nestjs-skeleton is [MIT licensed](LICENSE).
 
 ## TODO
 
-- Add MySQL
 - Add authentication
+- Add validation to entities
+- Manage Errors (404: entity not found, 401: auth error at high layer)
+- Add Plop to create new entities (CRUD operation for that entity, [Controller, Service, DTO])
   - Plop will be able to create new entities which requires or not Auth.
 - Add GraphQl
-- Add Plop to create new entities (CRUD operation for that entity, [Controller, Service, DTO, GraphQl])

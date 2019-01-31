@@ -11,14 +11,19 @@
     "start:prod": "node dist/main.js",
     "prestart:prod": "rimraf dist && yarn build",
     "build": "tsc -p tsconfig.build.json",
-    "lint": "tslint -p tsconfig.json -c tslint.json --fix"
+    "lint": "tslint -p tsconfig.json -c tslint.json --fix",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/typeorm": "^5.2.2",
+    "pg": "^7.8.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "typeorm": "^0.2.12",
     "typescript": "^3.0.1"
   },
   "devDependencies": {

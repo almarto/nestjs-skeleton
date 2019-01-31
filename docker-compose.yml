@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 'skeleton'
+      POSTGRES_USER: 'skeleton'
+      POSTGRES_DB: 'skeleton'
+    volumes:
+      - ./database_data:/var/lib/postgresql/data
+
+volumes:
+  database_data:
+    driver: local
