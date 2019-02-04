@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
 
 import { Book } from './book.entity';
+import { CreateBookDto } from './models/CreateBookDto';
 
 @Injectable()
 export class BooksService {
@@ -19,11 +20,14 @@ export class BooksService {
     return this.bookRepository.findOne(bookId);
   }
 
-  async addBook(book: Book): Promise<Book> {
+  async addBook(book: CreateBookDto): Promise<Book> {
     return this.bookRepository.save(book);
   }
 
-  async updateBook(bookId: string, book: DeepPartial<Book>): Promise<Book> {
+  async updateBook(
+    bookId: string,
+    book: DeepPartial<CreateBookDto>,
+  ): Promise<Book> {
     const bookToUpdate = await this.bookRepository.findOne(bookId);
     return this.bookRepository.save({ ...bookToUpdate, ...book });
   }

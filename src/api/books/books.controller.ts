@@ -1,3 +1,4 @@
+import { ApiUseTags } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -9,9 +10,11 @@ import {
   Put,
 } from '@nestjs/common';
 
+import { CreateBookDto } from './models/CreateBookDto';
 import { BooksService } from './books.service';
-import { Book } from './book.entity';
+import { DeleteBooksQuery } from './models/DeleteBooksQuery';
 
+@ApiUseTags('books')
 @Controller('books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
@@ -23,26 +26,29 @@ export class BooksController {
   }
 
   @Get(':bookId')
-  public async getBook(@Param('bookId') bookId) {
+  public async getBook(@Param('bookId') bookId: string) {
     const book = await this.booksService.getBook(bookId);
     return book;
   }
 
   @Post()
-  public async addBook(@Body() book: Book) {
+  public async addBook(@Body() book: CreateBookDto) {
     const createdBook = await this.booksService.addBook(book);
     return createdBook;
   }
 
   @Put(':bookId')
-  public async updateBook(@Param('bookId') bookId, @Body() book: Book) {
+  public async updateBook(
+    @Param('bookId') bookId: string,
+    @Body() book: CreateBookDto,
+  ) {
     const createdBook = await this.booksService.updateBook(bookId, book);
     return createdBook;
   }
 
   @Delete()
-  public async deleteBook(@Query() query) {
-    const books = await this.booksService.deleteBook(query.bookID);
+  public async deleteBook(@Query() { bookId }: DeleteBooksQuery) {
+    const books = await this.booksService.deleteBook(bookId);
     return books;
   }
 }
