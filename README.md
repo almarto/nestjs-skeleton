@@ -1,6 +1,6 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) API with Authentication, MySql and GraphQl starter repository.
+[Nest](https://github.com/nestjs/nest) API with Authentication, MySql, Swagger and GraphQl starter repository.
 
 ## Installation
 
@@ -23,6 +23,14 @@ $ yarn debug
 # production mode
 $ yarn prod
 ```
+
+## Access API
+
+[http://localhost:8080/](http://localhost:8080/)
+
+## Access Swagger documentation
+
+[http://localhost:8080/api](http://localhost:8080/api)
 
 #### In order to debug, if you're using VSCode you'll just need to enable Auto Attach
 
