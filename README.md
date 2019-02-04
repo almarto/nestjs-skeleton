@@ -26,11 +26,11 @@ $ yarn prod
 
 ## Access API
 
-[http://localhost:8080/](http://localhost:8080/)
+[http://localhost:8080](http://localhost:8080)  Here you'll get the message `Hello World!`
 
 ## Access Swagger documentation
 
-[http://localhost:8080/api](http://localhost:8080/api)
+[http://localhost:8080/api](http://localhost:8080/api)  Here you'll be able to test the API's endpoints
 
 #### In order to debug, if you're using VSCode you'll just need to enable Auto Attach
 
