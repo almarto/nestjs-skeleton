@@ -26,11 +26,11 @@ $ yarn prod
 
 ## Access API
 
-[http://localhost:8080](http://localhost:8080)  Here you'll get the message `Hello World!`
+[http://localhost:8080](http://localhost:8080) Here you'll get the message `Hello World!`
 
 ## Access Swagger documentation
 
-[http://localhost:8080/api](http://localhost:8080/api)  Here you'll be able to test the API's endpoints
+[http://localhost:8080/api](http://localhost:8080/api) Here you'll be able to test the API's endpoints
 
 #### In order to debug, if you're using VSCode you'll just need to enable Auto Attach
 
@@ -47,7 +47,7 @@ nestjs-skeleton is [MIT licensed](LICENSE).
 
 ## TODO
 
-- Add authentication
+- Add authentication with OAuth
 - Add validation to entities
 - Manage Errors (404: entity not found, 401: auth error at high layer)
 - Add Plop to create new entities (CRUD operation for that entity, [Controller, Service, DTO])
