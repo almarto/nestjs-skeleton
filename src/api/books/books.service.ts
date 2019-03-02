@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
 
@@ -17,7 +17,13 @@ export class BooksService {
   }
 
   async getBook(bookId: string): Promise<Book> {
-    return this.bookRepository.findOne(bookId);
+    const bookFound = await this.bookRepository.findOne(bookId);
+
+    if (!bookFound) {
+      throw new NotFoundException(`Book with id ${bookId} not found`);
+    }
+
+    return bookFound;
   }
 
   async addBook(book: CreateBookDto): Promise<Book> {
@@ -29,11 +35,21 @@ export class BooksService {
     book: DeepPartial<CreateBookDto>,
   ): Promise<Book> {
     const bookToUpdate = await this.bookRepository.findOne(bookId);
+
+    if (!bookToUpdate) {
+      throw new NotFoundException(`Book with id ${bookId} not found`);
+    }
+
     return this.bookRepository.save({ ...bookToUpdate, ...book });
   }
 
   async deleteBook(bookId: string): Promise<Book> {
     const bookToRemove = await this.bookRepository.findOne(bookId);
+
+    if (!bookToRemove) {
+      throw new NotFoundException(`Book with id ${bookId} not found`);
+    }
+
     return this.bookRepository.remove(bookToRemove);
   }
 }
