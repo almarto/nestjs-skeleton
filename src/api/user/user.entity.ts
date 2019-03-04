@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import * as crypto from 'crypto';
+import { Book } from '../books/book.entity';
 
 @Entity()
 export class User {
@@ -22,9 +23,11 @@ export class User {
     name: 'password',
   })
   passwordHash: string;
-
   set password(password: string) {
     const passHash = crypto.createHmac('sha256', password).digest('hex');
     this.passwordHash = passHash;
   }
+
+  @OneToMany(type => Book, book => book.user)
+  books: Book[];
 }
