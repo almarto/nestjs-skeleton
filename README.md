@@ -47,7 +47,6 @@ nestjs-skeleton is [MIT licensed](LICENSE).
 
 ## TODO
 
-- Add Plop to create new entities (CRUD operation for that entity, [Controller, Service, DTO])
 - Add authentication with OAuth
 - Add validation to entities
 - Manage Errors (404: entity not found, 401: auth error at high layer)
