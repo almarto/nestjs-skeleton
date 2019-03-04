@@ -20,7 +20,6 @@ export class UsersController {
   @Get()
   @ApiOperation({ title: 'Get List of All Users' })
   @ApiResponse({ status: 200, description: 'Users Found.' })
-  @ApiResponse({ status: 404, description: 'No Users found.' })
   public async getUsers() {
     const users = await this.usersService.getUsers();
     return users;

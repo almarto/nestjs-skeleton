@@ -19,7 +19,6 @@ export class {{pascalCase name}}sController {
 
   @Get()
   @ApiResponse( { status: 200, description: '{{camelCase name}}s Found.' } )
-  @ApiResponse( { status: 404, description: 'No {{camelCase name}}s found.' } )
   public async get{{pascalCase name}}s() {
     const {{camelCase name}}s = await this.{{camelCase name}}sService.get{{pascalCase name}}s();
     return {{camelCase name}}s;
