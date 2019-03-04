@@ -21,6 +21,7 @@
     "@nestjs/passport": "^5.1.0",
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^5.2.2",
+    "crypto": "^1.0.1",
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",

@@ -1,10 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+import { DispatchError } from './common/filter/DispatchError';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new DispatchError());
 
   const options = new DocumentBuilder()
     .setTitle('Nest Skeleton Documentation Title')
