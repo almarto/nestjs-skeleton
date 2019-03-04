@@ -4,8 +4,6 @@
   "jsRules": {
     "no-unused-expression": true
   },
-  "rules": {
-    "arrow-parens": true
-  },
+  "rules": {},
   "rulesDirectory": []
 }
