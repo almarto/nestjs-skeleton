@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class DeleteBooksQuery {
+export class DeleteBookQuery {
   @ApiModelProperty()
   bookId: string;
 }

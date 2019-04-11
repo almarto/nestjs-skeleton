@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, BaseEntity } from 'typeorm';
 import * as crypto from 'crypto';
-import { Book } from '../books/book.entity';
 
-@Entity()
-export class User {
+import { BookEntity } from '../book';
+
+@Entity({ name: 'users' })
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -28,6 +29,6 @@ export class User {
     this.passwordHash = passHash;
   }
 
-  @OneToMany(type => Book, book => book.user)
-  books: Book[];
+  @OneToMany(type => BookEntity, book => book.user)
+  books: BookEntity[];
 }

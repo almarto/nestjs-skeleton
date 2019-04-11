@@ -1,4 +1,3 @@
-import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -7,15 +6,21 @@ import {
   Param,
   Post,
   Put,
+  Res,
+  HttpStatus,
+  Req,
+  Session,
 } from '@nestjs/common';
+import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { Response, Request } from 'express';
 
-import { CreateUserDto } from './models/CreateUserDto';
-import { UsersService } from './user.service';
+import { CreateUserDto } from './models';
+import { UserService } from './';
 
 @ApiUseTags('users')
 @Controller('users')
-export class UsersController {
-  constructor(private usersService: UsersService) {}
+export class UserController {
+  constructor(private usersService: UserService) {}
 
   @Get()
   @ApiOperation({ title: 'Get List of All Users' })
@@ -47,10 +52,7 @@ export class UsersController {
   @ApiOperation({ title: 'Update User' })
   @ApiResponse({ status: 200, description: 'User Updated.' })
   @ApiResponse({ status: 404, description: 'User Not found.' })
-  public async updateUser(
-    @Param('userId') userId: string,
-    @Body() user: CreateUserDto,
-  ) {
+  public async updateUser(@Param('userId') userId: string, @Body() user: CreateUserDto) {
     const createdUser = await this.usersService.updateUser(userId, user);
     return createdUser;
   }

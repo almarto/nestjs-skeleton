@@ -2,21 +2,21 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
 
-import { Book } from './book.entity';
-import { CreateBookDto } from './models/CreateBookDto';
+import { CreateBookDto } from './models';
+import { BookEntity } from '.';
 
 @Injectable()
-export class BooksService {
+export class BookService {
   constructor(
-    @InjectRepository(Book)
-    private readonly bookRepository: Repository<Book>,
+    @InjectRepository(BookEntity)
+    private readonly bookRepository: Repository<BookEntity>,
   ) {}
 
-  async getBooks(): Promise<Book[]> {
+  async getBooks(): Promise<BookEntity[]> {
     return this.bookRepository.find();
   }
 
-  async getBook(bookId: string): Promise<Book> {
+  async getBook(bookId: string): Promise<BookEntity> {
     const bookFound = await this.bookRepository.findOne(bookId);
 
     if (!bookFound) {
@@ -26,14 +26,11 @@ export class BooksService {
     return bookFound;
   }
 
-  async addBook(book: CreateBookDto): Promise<Book> {
+  async addBook(book: CreateBookDto): Promise<BookEntity> {
     return this.bookRepository.save(book);
   }
 
-  async updateBook(
-    bookId: string,
-    book: DeepPartial<CreateBookDto>,
-  ): Promise<Book> {
+  async updateBook(bookId: string, book: DeepPartial<CreateBookDto>): Promise<BookEntity> {
     const bookToUpdate = await this.bookRepository.findOne(bookId);
 
     if (!bookToUpdate) {
@@ -43,7 +40,7 @@ export class BooksService {
     return this.bookRepository.save({ ...bookToUpdate, ...book });
   }
 
-  async deleteBook(bookId: string): Promise<Book> {
+  async deleteBook(bookId: string): Promise<BookEntity> {
     const bookToRemove = await this.bookRepository.findOne(bookId);
 
     if (!bookToRemove) {
