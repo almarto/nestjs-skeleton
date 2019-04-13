@@ -15,7 +15,7 @@ import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/sw
 import { Response, Request } from 'express';
 
 import { CreateUserDto } from './models';
-import { UserService } from '../user';
+import { UserService } from './user.service';
 
 @ApiUseTags('users')
 @Controller('users')

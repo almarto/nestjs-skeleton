@@ -6,7 +6,7 @@ import { AppErrorTypeEnum } from 'src/common/error/AppErrorTypeEnum';
 import { AppError } from 'src/common/error/AppError';
 
 import { CreateUserDto } from './models';
-import { UserEntity } from '../user';
+import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {
