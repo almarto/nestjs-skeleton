@@ -42,7 +42,7 @@ export class UserService {
       );
     }
 
-    return await this.userRepository.save(user);
+    return this.userRepository.save(user);
   }
 
   async updateUser(userId: string, user: DeepPartial<CreateUserDto>): Promise<UserEntity> {

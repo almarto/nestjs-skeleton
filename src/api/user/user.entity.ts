@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, BaseEntity } from 'typeorm';
-import * as crypto from 'crypto';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { createHmac } from 'crypto';
 
 import { BookEntity } from '../book';
 
 @Entity({ name: 'users' })
-export class UserEntity extends BaseEntity {
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,7 +25,7 @@ export class UserEntity extends BaseEntity {
   })
   passwordHash: string;
   set password(password: string) {
-    const passHash = crypto.createHmac('sha256', password).digest('hex');
+    const passHash = createHmac('sha256', password).digest('hex');
     this.passwordHash = passHash;
   }
 
