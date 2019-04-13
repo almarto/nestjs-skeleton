@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
-import { UserEntity } from 'src/api/user';
+import { UserEntity } from '../user';
 
 @Entity({ name: 'books' })
 export class BookEntity {

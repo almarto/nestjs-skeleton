@@ -2,7 +2,7 @@ import { ApiUseTags } from '@nestjs/swagger';
 import { Body, Controller, Delete, Get, Param, Post, Query, Put } from '@nestjs/common';
 
 import { CreateBookDto, DeleteBookQuery } from './models';
-import { BookService } from '.';
+import { BookService } from '../book';
 
 @ApiUseTags('books')
 @Controller('books')
