@@ -47,5 +47,4 @@ nestjs-skeleton is [MIT licensed](LICENSE).
 
 ## TODO
 
-- Add authentication with OAuth
 - Add GraphQl
