@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
+import { createHmac } from 'crypto';
 
 import { AppErrorTypeEnum } from 'src/common/error/AppErrorTypeEnum';
 import { AppError } from 'src/common/error/AppError';
@@ -30,11 +31,12 @@ export class UserService {
   }
 
   async addUser(user: CreateUserDto): Promise<UserEntity> {
-    const existentUser = await this.userRepository.findOne({
+    let u: UserEntity;
+    u = await this.userRepository.findOne({
       username: user.username,
     });
 
-    if (existentUser) {
+    if (u) {
       throw new AppError(
         AppErrorTypeEnum.ALREADY_EXISTS,
         'User',
@@ -42,7 +44,9 @@ export class UserService {
       );
     }
 
-    return this.userRepository.save(user);
+    u = new UserEntity();
+    Object.assign(u, user);
+    return this.userRepository.save(u);
   }
 
   async updateUser(userId: string, user: DeepPartial<CreateUserDto>): Promise<UserEntity> {
@@ -63,5 +67,25 @@ export class UserService {
     }
 
     return this.userRepository.remove(userToRemove);
+  }
+
+  async authenticateUser({
+    username,
+    password,
+  }: {
+    username: string
+    password: string,
+  }): Promise<UserEntity> {
+    let u: UserEntity;
+    u = await this.userRepository.findOne({
+      select: ['id', 'username', 'passwordHash'],
+      where: { username },
+    });
+
+    const passHash = createHmac('sha256', password).digest('hex');
+    if (u.passwordHash === passHash) {
+      delete u.passwordHash;
+      return u;
+    }
   }
 }

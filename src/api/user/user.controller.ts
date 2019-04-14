@@ -10,9 +10,12 @@ import {
   HttpStatus,
   Req,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Response, Request } from 'express';
+
+import { AppAuthGuard } from 'src/auth/AppAuthGuard';
 
 import { CreateUserDto } from './models';
 import { UserService } from './user.service';
@@ -45,6 +48,7 @@ export class UserController {
   @ApiResponse({ status: 422, description: 'User Already Exists.' })
   public async addUser(@Body() user: CreateUserDto) {
     const createdUser = await this.usersService.addUser(user);
+    delete createdUser.passwordHash;
     return createdUser;
   }
 
@@ -64,5 +68,15 @@ export class UserController {
   public async deleteUser(@Param('userId') userId: string) {
     const users = await this.usersService.deleteUser(userId);
     return users;
+  }
+
+  @Post('login')
+  @ApiBearerAuth()
+  @UseGuards(AppAuthGuard)
+  @ApiOperation({ title: 'Authenticate' })
+  @ApiResponse({ status: 200, description: 'Login Successful.' })
+  @ApiResponse({ status: 401, description: 'Unauthorized.' })
+  public async login(@Req() req: Request, @Res() res: Response, @Session() session) {
+    return res.status(HttpStatus.OK).send();
   }
 }
