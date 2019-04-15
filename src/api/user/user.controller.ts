@@ -15,7 +15,7 @@ import {
 import { ApiUseTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Response, Request } from 'express';
 
-import { AppAuthGuard } from 'src/auth/AppAuthGuard';
+import { AppAuthGuard } from 'src/api/auth/AppAuthGuard';
 
 import { CreateUserDto } from './models';
 import { UserService } from './user.service';

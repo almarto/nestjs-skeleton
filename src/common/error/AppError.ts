@@ -9,18 +9,10 @@ export class AppError extends Error {
   public errorMessage: string;
   public userMessage: string;
 
-  constructor(
-    errorCode: AppErrorTypeEnum,
-    entity: string,
-    customMessage: string,
-  ) {
+  constructor(errorCode: AppErrorTypeEnum, entity: string = '', customMessage?: string) {
     super();
 
-    const errorMessageConfig: IErrorMessage = this.getError(
-      errorCode,
-      entity,
-      customMessage,
-    );
+    const errorMessageConfig: IErrorMessage = this.getError(errorCode, entity, customMessage);
 
     if (!errorMessageConfig) {
       throw new Error('Unable to find message code error.');

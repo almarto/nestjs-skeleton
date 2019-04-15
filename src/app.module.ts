@@ -5,7 +5,7 @@ import { Connection } from 'typeorm';
 import { BookModule } from './api/book';
 import { UserModule } from './api/user';
 import { AppController } from './app.controller';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './api/auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), BookModule, UserModule, AuthModule],
