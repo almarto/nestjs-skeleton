@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
 
+import { UserEntity, UserService } from '../user';
+
 import { CreateBookDto } from './models';
 import { BookEntity } from './book.entity';
 
@@ -10,6 +12,7 @@ export class BookService {
   constructor(
     @InjectRepository(BookEntity)
     private readonly bookRepository: Repository<BookEntity>,
+    private readonly userService: UserService,
   ) {}
 
   async getBooks(): Promise<BookEntity[]> {
@@ -26,8 +29,9 @@ export class BookService {
     return bookFound;
   }
 
-  async addBook(book: CreateBookDto): Promise<BookEntity> {
-    return this.bookRepository.save(book);
+  async addBook(book: CreateBookDto, user: UserEntity): Promise<BookEntity> {
+    const bookCreated = await this.bookRepository.save({ ...book, user });
+    return bookCreated;
   }
 
   async updateBook(bookId: string, book: DeepPartial<CreateBookDto>): Promise<BookEntity> {

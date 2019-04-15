@@ -1,5 +1,8 @@
 import { ApiUseTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, Param, Post, Query, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Put, UseGuards } from '@nestjs/common';
+
+import { SessionGuard } from '../auth/SessionGuard';
+import { UserEntity, sessionUser } from '../user';
 
 import { CreateBookDto, DeleteBookQuery } from './models';
 import { BookService } from './book.service';
@@ -22,9 +25,9 @@ export class BookController {
   }
 
   @Post()
-  public async addBook(@Body() book: CreateBookDto) {
-    // , @SessionUser() user: UserEntity
-    const createdBook = await this.bookService.addBook(book);
+  @UseGuards(SessionGuard)
+  public async addBook(@Body() book: CreateBookDto, @sessionUser() user: UserEntity) {
+    const createdBook = await this.bookService.addBook(book, user);
     return createdBook;
   }
 
