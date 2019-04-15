@@ -37,7 +37,7 @@ export class UserController {
   @ApiOperation({ title: 'Get User' })
   @ApiResponse({ status: 200, description: 'User Found.' })
   @ApiResponse({ status: 404, description: 'User Not found.' })
-  public async getUser(@Param('userId') userId: string) {
+  public async getUser(@Param('userId') userId: number) {
     const user = await this.usersService.getUser(userId);
     return user;
   }
@@ -56,7 +56,7 @@ export class UserController {
   @ApiOperation({ title: 'Update User' })
   @ApiResponse({ status: 200, description: 'User Updated.' })
   @ApiResponse({ status: 404, description: 'User Not found.' })
-  public async updateUser(@Param('userId') userId: string, @Body() user: CreateUserDto) {
+  public async updateUser(@Param('userId') userId: number, @Body() user: CreateUserDto) {
     const createdUser = await this.usersService.updateUser(userId, user);
     return createdUser;
   }
@@ -65,7 +65,7 @@ export class UserController {
   @ApiOperation({ title: 'Delete User' })
   @ApiResponse({ status: 200, description: 'User Removed.' })
   @ApiResponse({ status: 404, description: 'User Not found.' })
-  public async deleteUser(@Param('userId') userId: string) {
+  public async deleteUser(@Param('userId') userId: number) {
     const users = await this.usersService.deleteUser(userId);
     return users;
   }

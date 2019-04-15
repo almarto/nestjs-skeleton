@@ -5,6 +5,7 @@ import { createHmac } from 'crypto';
 
 import { AppErrorTypeEnum } from 'src/common/error/AppErrorTypeEnum';
 import { AppError } from 'src/common/error/AppError';
+import { BookEntity } from '../book';
 
 import { CreateUserDto } from './models';
 import { UserEntity } from './user.entity';
@@ -20,7 +21,7 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  async getUser(userId: string): Promise<UserEntity> {
+  async getUser(userId: number): Promise<UserEntity> {
     const userFound = await this.userRepository.findOne(userId);
 
     if (!userFound) {
@@ -49,7 +50,7 @@ export class UserService {
     return this.userRepository.save(u);
   }
 
-  async updateUser(userId: string, user: DeepPartial<CreateUserDto>): Promise<UserEntity> {
+  async updateUser(userId: number, user: DeepPartial<CreateUserDto>): Promise<UserEntity> {
     const userToUpdate = await this.userRepository.findOne(userId);
 
     if (!userToUpdate) {
@@ -59,7 +60,7 @@ export class UserService {
     return this.userRepository.save({ ...userToUpdate, ...user });
   }
 
-  async deleteUser(userId: string): Promise<UserEntity> {
+  async deleteUser(userId: number): Promise<UserEntity> {
     const userToRemove = await this.userRepository.findOne(userId);
 
     if (!userToRemove) {
