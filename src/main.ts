@@ -16,7 +16,7 @@ async function bootstrap() {
   app.use(
     session({
       secret: 'secret-key',
-      name: 'sess-tutorial',
+      name: 'nestjs-skeleton',
       resave: false,
       saveUninitialized: false,
     }),
