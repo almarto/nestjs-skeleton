@@ -1,6 +1,6 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) API with Authentication, MySql, Swagger and GraphQl starter repository.
+[Nest](https://github.com/nestjs/nest) API with Authentication, [PostgreSQL](https://www.postgresql.org/) and Swagger starter repository.
 
 ## Installation
 
