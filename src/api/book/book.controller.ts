@@ -13,14 +13,16 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @Get()
-  public async getBooks() {
-    const books = await this.bookService.getBooks();
+  @UseGuards(SessionGuard)
+  public async getBooks(@sessionUser() user: UserEntity) {
+    const books = await this.bookService.getBooks(user);
     return books;
   }
 
   @Get(':bookId')
-  public async getBook(@Param('bookId') bookId: string) {
-    const book = await this.bookService.getBook(bookId);
+  @UseGuards(SessionGuard)
+  public async getBook(@Param('bookId') bookId: string, @sessionUser() user: UserEntity) {
+    const book = await this.bookService.getBook(bookId, user);
     return book;
   }
 
@@ -32,14 +34,20 @@ export class BookController {
   }
 
   @Put(':bookId')
-  public async updateBook(@Param('bookId') bookId: string, @Body() book: CreateBookDto) {
-    const createdBook = await this.bookService.updateBook(bookId, book);
+  @UseGuards(SessionGuard)
+  public async updateBook(
+    @Param('bookId') bookId: string,
+    @Body() book: CreateBookDto,
+    @sessionUser() user: UserEntity,
+  ) {
+    const createdBook = await this.bookService.updateBook(bookId, book, user);
     return createdBook;
   }
 
   @Delete()
-  public async deleteBook(@Query() { bookId }: DeleteBookQuery) {
-    const books = await this.bookService.deleteBook(bookId);
+  @UseGuards(SessionGuard)
+  public async deleteBook(@Query() { bookId }: DeleteBookQuery, @sessionUser() user: UserEntity) {
+    const books = await this.bookService.deleteBook(bookId, user);
     return books;
   }
 }
